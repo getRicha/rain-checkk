@@ -74,7 +74,7 @@ body{
 
 .future-forecast{
     background: rgba(24,24,27,0.8);
-    padding: 25px;
+    padding: 15px 25px;
     position: fixed;
     bottom: 0;
     display: flex;
