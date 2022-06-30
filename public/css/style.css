@@ -147,7 +147,6 @@ body{
     .future-forecast{
         justify-content: start;
         align-items: none;
-        overflow-y: scroll;
     }
 
     .future-forecast .today .temp{

@@ -1,3 +1,4 @@
+
 const timeElement = document.getElementById('time')
 const dateElement = document.getElementById('date')
 const currentWeatherElements = document.getElementById('current-weather-items')
@@ -9,7 +10,6 @@ const currentTemp = document.getElementById('current-temp')
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-const API_KEY = 'dd415862a06d3af615ab89a3a86faae6'
 
 setInterval(() => {
     const time = new Date();
@@ -31,13 +31,14 @@ getWeatherData()
 function getWeatherData () {
     navigator.geolocation.getCurrentPosition((success) => {
     let {latitude, longitude } = success.coords;
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`)
+    fetch(`weather/${latitude},${longitude}`)
         .then(res => res.json())
         .then(data => showWeatherData(data))
     })
 }
 
 function showWeatherData (data){
+    console.log(data)
     let {humidity, pressure, sunrise, sunset, wind_speed} = data.current;
 
     timeZone.innerHTML = data.timezone;
@@ -69,7 +70,7 @@ function showWeatherData (data){
     data.daily.forEach((day, idx) => {
         if(idx == 0){
             currentTemp.innerHTML = 
-            `<img src=" http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
+            `<img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" title="${day.weather[0].description}" class="w-icon">
             <div class="other">
                 <span class="day">${window.moment(day.dt*1000).format('dddd')}</span>
                 <div class="temp">Night - ${day.temp.night}&#176; C</div>
@@ -80,13 +81,11 @@ function showWeatherData (data){
             otherDayForcast += 
             `<div class="weather-forecast-item">
                 <span class="day">${window.moment(day.dt*1000).format('ddd')}</span>
-                <img src=" http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
+                <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" title="${day.weather[0].description}" class="w-icon">
                 <div class="temp">Night - ${day.temp.night}&#176; C</div>
                 <div class="temp">Day - ${day.temp.day}&#176; C</div>
             </div>`
         }
     })
-
-
     weatherForecast.innerHTML = otherDayForcast;
 }
