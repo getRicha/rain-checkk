@@ -4,96 +4,78 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Weather App</title>
 </head>
 <body>
     <section class="container">
-        <section class="current-info">
-            <div class="date-container">
-                <div class="time" id="time">
-                    12:30<span id="am-pm">PM</span>
-                </div>
-                <div class="date" id="date">
-                    Monday, 24 May
-                </div>
-                <div class="others" id="current-weather-items">
-                    <div class="weather-item">
-                        <span>Humidity</span>
-                        <span>100</span>
-                    </div>
-                    <div class="weather-item">
-                        <span>Pressure</span>
-                        <span>1060</span>
-                    </div>
-                    <div class="weather-item">
-                        <span>Wind Speed</span>
-                        <span>2.24</span>
-                    </div>
-                    <div class="weather-item">
-                        <span>Sunrise</span>
-                        <span>6:20 am</span>
-                    </div>
-                    <div class="weather-item">
-                        <span>Sunset</span>
-                        <span>7:00 pm</span>
-                    </div>
-                </div>
+        <div class="card">
+            <div class="search">
+                <input type="text" class="search-box" placeholder="Search">
+                <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.5em" width="1.5em" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z"></path>
+                    <path d="M11.412,8.586C11.791,8.966,12,9.468,12,10h2c0-1.065-0.416-2.069-1.174-2.828c-1.514-1.512-4.139-1.512-5.652,0 l1.412,1.416C9.346,7.83,10.656,7.832,11.412,8.586z"></path>
+                </svg></button>
             </div>
-            <div class="place-container">
-                <span class="time-zone" id="time-zone">Asia/Kolkata</span><br>
-                <span class="country" id="country">IN</span>
-            </div>
-        </section>
-    </section>
-    <section class="future-forecast">
-        <div class="today" id="current-temp">
-            <!--Weather for today-->
-            <div class="weather-forecast-item">
-                <span class="day">Tue</span>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                <div class="temp">Night - 25.99&#176; C</div>
-                <div class="temp">Day - 35.14&#176; C</div>
+            <div class="weather loading">
+                <h2 class="city">Weather in Lucknow</h2>
+                <h1 class="temp">51°C</h1>
+                <div class="flex">
+                    <img src="" alt="weather icon" class="icon">
+                    <div class="description">Cloudy</div>
+                </div>
+                <div class="humidity">Humidity: 60%</div>
+                <div class="pressure">Presuure: 997</div>
+                <div class="wind-speed">Wind speed: 6.2 km/h</div>
+                <div class="sunrise">Sunrise: 6:20 am</div>
+                <div class="sunset">Sunset: 7:00 pm</div>
             </div>
         </div>
-        <div class="weather-forecast" id="weather-forecast">
-            <!--Forecast for next 7 days-->
-            <div class="weather-forecast-item">
-                <span class="day">Tue</span>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                <div class="temp">Night - 25.99&#176; C</div>
-                <div class="temp">Day - 35.14&#176; C</div>
-            </div>
-            <div class="weather-forecast-item" id="weather-forecast-item">
-                <span class="day">Wed</span>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                <div class="temp">Night - 25.99&#176; C</div>
-                <div class="temp">Day - 35.14&#176; C</div>
-            </div>
-            <div class="weather-forecast-item">
-                <span class="day">Thur</span>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                <div class="temp">Night - 25.99&#176; C</div>
-                <div class="temp">Day - 35.14&#176; C</div>
-            </div>
-            <div class="weather-forecast-item">
-                <span class="day">Fri</span>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                <div class="temp">Night - 25.99&#176; C</div>
-                <div class="temp">Day - 35.14&#176; C</div>
-            </div>
-            <div class="weather-forecast-item">
-                <span class="day">Sat</span>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                <div class="temp">Night - 25.99&#176; C</div>
-                <div class="temp">Day - 35.14&#176; C</div>
-            </div>
-            <div class="weather-forecast-item">
-                <span class="day">Sun</span>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                <div class="temp">Night - 25.99&#176; C</div>
-                <div class="temp">Day - 35.14&#176; C</div>
-            </div>
+        <div class="place-container">
+            <span class="time-zone" id="time-zone">Asia/Kolkata</span><br>
+            <span class="country" id="country">IN</span>
+        </div>
+    </section>
+    <section class="future-forecast" id="weather-forecast">
+        <!--Forecast for next 7 days-->
+        <div class="weather-forecast-item">
+            <span class="day">Tue</span>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+            <div class="temp">Min - 25.99&#176; C</div>
+            <div class="temp">Max - 35.14&#176; C</div>
+        </div>
+        <div class="weather-forecast-item" id="weather-forecast-item">
+            <span class="day">Wed</span>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+            <div class="temp">Min - 25.99&#176; C</div>
+            <div class="temp">Max - 35.14&#176; C</div>
+        </div>
+        <div class="weather-forecast-item">
+            <span class="day">Thur</span>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+            <div class="temp">Min - 25.99&#176; C</div>
+            <div class="temp">Max - 35.14&#176; C</div>
+        </div>
+        <div class="weather-forecast-item">
+            <span class="day">Fri</span>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+            <div class="temp">Min - 25.99&#176; C</div>
+            <div class="temp">Max - 35.14&#176; C</div>
+        </div>
+        <div class="weather-forecast-item">
+            <span class="day">Sat</span>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+            <div class="temp">Min - 25.99&#176; C</div>
+            <div class="temp">Max - 35.14&#176; C</div>
+        </div>
+        <div class="weather-forecast-item">
+            <span class="day">Sun</span>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+            <div class="temp">Min - 25.99&#176; C</div>
+            <div class="temp">Max - 35.14&#176; C</div>
         </div>
     </section>
 
