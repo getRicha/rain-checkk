@@ -22,7 +22,10 @@ app.get('/weather/:latlon',async (req,res) => {
     res.json(jsonData)
 })
 app.get('*',(req,res) => {
-    console.log('404 page not found')
+    res.render('404.ejs',{
+        error: '404',
+        title : 'Page not found'
+    })
 })
 
 app.listen(PORT || process.env.PORT,() => console.log(`Listening on port ${PORT}`))
