@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="public/css/style.css">
     <title>Weather App</title>
 </head>
 <body>
@@ -27,11 +27,18 @@
                     <img src="" alt="weather icon" class="icon">
                     <div class="description">Cloudy</div>
                 </div>
-                <div class="humidity">Humidity: 60%</div>
-                <div class="pressure">Presuure: 997</div>
-                <div class="wind-speed">Wind speed: 6.2 km/h</div>
-                <div class="sunrise">Sunrise: 6:20 am</div>
-                <div class="sunset">Sunset: 7:00 pm</div>
+                <div class="grid">
+                    <span>Humidity</span>
+                    <div class="humidity">60%</div>
+                    <span>Pressure</span>
+                    <div class="pressure">997</div>
+                    <span>Wind Speed</span>
+                    <div class="wind-speed">6.2 km/h</div>
+                    <span>Sunrise</span>
+                    <div class="sunrise">6:20 am</div>
+                    <span>Sunset</span>
+                    <div class="sunset">7:00 pm</div>
+                </div>
             </div>
         </div>
         <div class="place-container">
@@ -43,43 +50,76 @@
         <!--Forecast for next 7 days-->
         <div class="weather-forecast-item">
             <span class="day">Tue</span>
-            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-            <div class="temp">Min - 25.99&#176; C</div>
-            <div class="temp">Max - 35.14&#176; C</div>
-        </div>
-        <div class="weather-forecast-item" id="weather-forecast-item">
-            <span class="day">Wed</span>
-            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-            <div class="temp">Min - 25.99&#176; C</div>
-            <div class="temp">Max - 35.14&#176; C</div>
+            <div class="row">
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                <div>
+                    <div class="temp">Min - 25.99&#176; C</div>
+                    <div class="temp">Max - 35.14&#176; C</div>
+                </div>
+            </div>
         </div>
         <div class="weather-forecast-item">
-            <span class="day">Thur</span>
-            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-            <div class="temp">Min - 25.99&#176; C</div>
-            <div class="temp">Max - 35.14&#176; C</div>
+            <span class="day">Wed</span>
+            <div class="row">
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                <div>
+                    <div class="temp">Min - 25.99&#176; C</div>
+                    <div class="temp">Max - 35.14&#176; C</div>
+                </div>
+            </div>
+        </div>
+        <div class="weather-forecast-item">
+            <span class="day">Thu</span>
+            <div class="row">
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                <div>
+                    <div class="temp">Min - 25.99&#176; C</div>
+                    <div class="temp">Max - 35.14&#176; C</div>
+                </div>
+            </div>
         </div>
         <div class="weather-forecast-item">
             <span class="day">Fri</span>
-            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-            <div class="temp">Min - 25.99&#176; C</div>
-            <div class="temp">Max - 35.14&#176; C</div>
+            <div class="row">
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                <div>
+                    <div class="temp">Min - 25.99&#176; C</div>
+                    <div class="temp">Max - 35.14&#176; C</div>
+                </div>
+            </div>
         </div>
         <div class="weather-forecast-item">
             <span class="day">Sat</span>
-            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-            <div class="temp">Min - 25.99&#176; C</div>
-            <div class="temp">Max - 35.14&#176; C</div>
+            <div class="row">
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                <div>
+                    <div class="temp">Min - 25.99&#176; C</div>
+                    <div class="temp">Max - 35.14&#176; C</div>
+                </div>
+            </div>
         </div>
         <div class="weather-forecast-item">
             <span class="day">Sun</span>
-            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-            <div class="temp">Min - 25.99&#176; C</div>
-            <div class="temp">Max - 35.14&#176; C</div>
+            <div class="row">
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                <div>
+                    <div class="temp">Min - 25.99&#176; C</div>
+                    <div class="temp">Max - 35.14&#176; C</div>
+                </div>
+            </div>
+        </div>
+        <div class="weather-forecast-item">
+            <span class="day">Mon</span>
+            <div class="row">
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                <div>
+                    <div class="temp">Min - 25.99&#176; C</div>
+                    <div class="temp">Max - 35.14&#176; C</div>
+                </div>
+            </div>
         </div>
     </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <script src="js/script.js"></script>
 </body>
 </html>
