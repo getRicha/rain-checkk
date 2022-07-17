@@ -1,91 +1,68 @@
+let weather = {
 
-const timeElement = document.getElementById('time')
-const dateElement = document.getElementById('date')
-const currentWeatherElements = document.getElementById('current-weather-items')
-const timeZone = document.getElementById('time-zone')
-const countryElement = document.getElementById('country')
-const weatherForecast = document.getElementById('weather-forecast')
-const currentTemp = document.getElementById('current-temp')
+    fetchCoords: async function(city){
+        const response = await fetch(`coords/${city}`)
+        const data = await response.json()
+        this.fetchWeather(data[0].lat,data[0].lon,city)
+    },
 
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    fetchWeather: async function(lat,lon,city){
+        const res = await fetch(`weather/${lat},${lon}`)
+        const data = await res.json()
+        this.displayWeather(data,city)
+    },
 
+    displayWeather: function(data,city){
+        // Current Weather
+        const {icon, description} = data.current.weather[0]
+        const {temp,humidity,pressure,wind_speed,sunrise,sunset} = data.current
+        const timeZone = data.timezone
+        document.getElementById('time-zone').innerHTML = timeZone
+        document.getElementById('country').innerHTML = data.lat + '°N, ' + data.lon+'°E'
+        document.querySelector('.city').innerText = 'Weather in '+ city
+        document.querySelector('.icon').src = `https://openweathermap.org/img/wn/${icon}.png`
+        document.querySelector('.description').innerText = description
+        document.querySelector('.temp').innerText = temp + "°C"
+        document.querySelector('.humidity').innerText = `${humidity}%`
+        document.querySelector('.pressure').innerText = `${pressure}hPa`
+        document.querySelector('.wind-speed').innerText = `${wind_speed} m/s`
+        document.querySelector('.sunrise').innerText = window.moment(sunrise*1000).format('HH:mm a')
+        document.querySelector('.sunset').innerText = window.moment(sunset*1000).format('HH:mm a')
+        document.querySelector('.weather').classList.remove('loading')
+        document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + encodeURIComponent(description) + "')"
 
-setInterval(() => {
-    const time = new Date();
-    const month = time.getMonth();
-    const date = time.getDate();
-    const day = time.getDay();
-    const hour = time.getHours();
-    const hoursIn12HrFormat = hour >= 13 ? hour%12 : hour
-    const minutes = time.getMinutes();
-    const ampm = hour>=12 ? 'PM' : 'AM'
+        // Weather Forecast
+        document.querySelectorAll('.weather-forecast-item').forEach((item, idx) => {
+            const {icon, description} = data.daily[idx].weather[0]
+            const {min, max} = data.daily[idx].temp
+            item.querySelector('.day').innerText = window.moment(data.daily[idx].dt*1000).format('ddd')
+            item.querySelector('.min').innerText = `Min - ${min}°C`
+            item.querySelector('.max').innerText = `Max - ${max}°C`
+            item.querySelector('.w-icon').src = `https://openweathermap.org/img/wn/${icon}@2x.png`
+            item.querySelector('.w-icon').title = description
+        })
+    },
 
-    timeElement.innerHTML = (hoursIn12HrFormat < 10? '0'+hoursIn12HrFormat : hoursIn12HrFormat) + ':' + (minutes < 10? '0'+minutes: minutes)+ ' ' + `<span id='am-pm'>${ampm}</span>`
-
-    dateElement.innerHTML = days[day] + ', ' + date+ ' ' + months[month]
-
-}, 1000)
-
-getWeatherData()
-function getWeatherData () {
-    navigator.geolocation.getCurrentPosition((success) => {
-    let {latitude, longitude } = success.coords;
-    fetch(`weather/${latitude},${longitude}`)
-        .then(res => res.json())
-        .then(data => showWeatherData(data))
-    })
+    search: function () {
+        this.fetchCoords(document.querySelector(".search-box").value);
+    }
 }
 
-function showWeatherData (data){
-    console.log(data)
-    let {humidity, pressure, sunrise, sunset, wind_speed} = data.current;
+document.querySelector('.search button').addEventListener('click', ()=>{
+    weather.search()
+})
 
-    timeZone.innerHTML = data.timezone;
-    countryElement.innerHTML = data.lat + 'N ' + data.lon+'E'
+document.querySelector(".search-box").addEventListener("keyup", function (event) {
+    if (event.key == "Enter") {
+      weather.search();
+    }
+})
 
-    currentWeatherElements.innerHTML = 
-    `<div class="weather-item">
-        <span>Humidity</span>
-        <span>${humidity}</span>
-    </div>
-    <div class="weather-item">
-        <span>Pressure</span>
-        <span>${pressure}</span>
-    </div>
-    <div class="weather-item">
-        <span>Wind Speed</span>
-        <span>${wind_speed}</span>
-    </div>
-    <div class="weather-item">
-        <span>Sunrise</span>
-        <span>${window.moment(sunrise * 1000).format('HH:mm a')}</span>
-    </div>
-    <div class="weather-item">
-        <span>Sunset</span>
-        <span>${window.moment(sunset*1000).format('HH:mm a')}</span>
-    </div>`
-
-    let otherDayForcast = ''
-    data.daily.forEach((day, idx) => {
-        if(idx == 0){
-            currentTemp.innerHTML = 
-            `<img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" title="${day.weather[0].description}" class="w-icon">
-            <div class="other">
-                <span class="day">${window.moment(day.dt*1000).format('dddd')}</span>
-                <div class="temp">Night - ${day.temp.night}&#176; C</div>
-                <div class="temp">Day - ${day.temp.day}&#176; C</div>
-            </div>`
-
-        }else{
-            otherDayForcast += 
-            `<div class="weather-forecast-item">
-                <span class="day">${window.moment(day.dt*1000).format('ddd')}</span>
-                <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" title="${day.weather[0].description}" class="w-icon">
-                <div class="temp">Night - ${day.temp.night}&#176; C</div>
-                <div class="temp">Day - ${day.temp.day}&#176; C</div>
-            </div>`
-        }
-    })
-    weatherForecast.innerHTML = otherDayForcast;
-}
+navigator.geolocation.getCurrentPosition((success) => {
+    let {latitude, longitude } = success.coords
+    fetch(`city/${latitude},${longitude}`)
+        .then((response) => response.json())
+        .then((data) => {
+            weather.fetchWeather(latitude,longitude,data[0].name)
+        })
+})
