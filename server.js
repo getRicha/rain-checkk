@@ -45,4 +45,4 @@ app.get('*',(req,res) => {
     })
 })
 
-app.listen(PORT || process.env.PORT,() => console.log(`Listening on port ${PORT}`))
+app.listen(process.env.PORT || PORT,() => console.log(`Listening on port ${PORT}`))
